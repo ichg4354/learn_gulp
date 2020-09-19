@@ -11,6 +11,7 @@ const paths = {
     dest: "build",
   },
   img: {
+    watch: "src/img/*",
     src: "src/img/*",
     dest: "build/img",
   },
@@ -23,7 +24,10 @@ const clean = () => del(["build"]);
 
 const webserver = () => gulp.src("build").pipe(ws({ livereload: true }));
 
-const watch = () => gulp.watch(paths.pug.watch, pug);
+const watch = () => {
+  gulp.watch(paths.pug.watch, pug);
+  gulp.watch(paths.img.watch, image);
+};
 
 const image = () =>
   gulp.src(paths.img.src).pipe(img()).pipe(gulp.dest(paths.img.dest));
