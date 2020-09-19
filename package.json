@@ -22,10 +22,17 @@
     "@babel/preset-env": "^7.11.5",
     "@babel/register": "^7.11.5",
     "del": "^5.1.0",
-    "gulp-pug": "^4.0.1"
+    "gulp-autoprefixer": "^7.0.1",
+    "gulp-csso": "^4.0.1",
+    "gulp-pug": "^4.0.1",
+    "uglifyify": "^5.0.2"
   },
   "devDependencies": {
+    "babelify": "^10.0.0",
+    "gulp-bro": "^2.0.0",
     "gulp-image": "^6.2.1",
-    "gulp-webserver": "^0.9.1"
+    "gulp-sass": "^4.1.0",
+    "gulp-webserver": "^0.9.1",
+    "node-sass": "^4.14.1"
   }
 }
