@@ -71,17 +71,16 @@ const watch = () => {
   gulp.watch(paths.js.watch, js);
 };
 
-const ghPage = () => {
-  gulp.src("build/**/*").pipe(gh());
-};
+const ghPage = () => gulp.src("build/**/*").pipe(gh());
+
+const cleanPublishFile = () => del([".publish"]);
 
 const prepare = gulp.series([clean, image]);
 
 const assets = gulp.series([pug, styles, js]);
 
-const localServerDeploy = gulp.series([webserver, watch]);
+const localServerDeploy = gulp.parallel([webserver, watch]);
 
-const build = gulp.series([prepare, assets]);
-
+export const build = gulp.series([prepare, assets]);
 export const dev = gulp.series([build, localServerDeploy]);
-export const deploy = gulp.series([build, ghPage]);
+export const deploy = gulp.series([build, ghPage, cleanPublishFile]);
