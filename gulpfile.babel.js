@@ -8,6 +8,7 @@ import apref from "gulp-autoprefixer";
 import csso from "gulp-csso";
 import browserify from "gulp-bro";
 import babelify from "babelify";
+import gh from "gulp-gh-pages";
 
 const paths = {
   pug: {
@@ -70,10 +71,17 @@ const watch = () => {
   gulp.watch(paths.js.watch, js);
 };
 
+const ghPage = () => {
+  gulp.src("build/**/*").pipe(gh());
+};
+
 const prepare = gulp.series([clean, image]);
 
 const assets = gulp.series([pug, styles, js]);
 
-const preBuild = gulp.series([webserver, watch]);
+const localServerDeploy = gulp.series([webserver, watch]);
 
-export const dev = gulp.series([prepare, assets, preBuild]);
+const build = gulp.series([prepare, assets]);
+
+export const dev = gulp.series([build, localServerDeploy]);
+export const deploy = gulp.series([build, ghPage]);
